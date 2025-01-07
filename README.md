@@ -3,6 +3,8 @@ WIP for all Devices.
 Made Entirely In SwiftUI with no Metal Shaders.
 Animated Device Gif Demos Below
 
+Will be used in [Apple Inteligence For WatchOS](https://github.com/jacobamobin/AppleInteligenceWatchOS)
+
 ![Header](ReadMe/Header.png)
 
 # Devices
