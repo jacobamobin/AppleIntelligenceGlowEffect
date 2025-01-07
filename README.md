@@ -2,6 +2,8 @@
 Apple Intelligence Like Glow Effects For All Devices!
 Made Entirely In SwiftUI with no Metal Shaders
 
+[./ReadMe/Header.png]
+
 # Devices
 - WatchOS (Complete)
 - IOS (Coming Soon)
@@ -10,3 +12,4 @@ Made Entirely In SwiftUI with no Metal Shaders
 
 #WatchOS Demo
 
+[./ReadMe/WatchOSDemo.gif]
