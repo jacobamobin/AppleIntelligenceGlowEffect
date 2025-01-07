@@ -1,8 +1,8 @@
 # AppleIntelligenceGlowEffect
 Apple Intelligence Like Glow Effects For All Devices!
-Made Entirely In SwiftUI with no Metal Shaders
+Made Entirely In SwiftUI with no Metal Shaders.
 
-![](https://github.com/AppleIntelligenceGlowEffect/ReadMe/Header.png)
+![](https://github.com/jacobamobin/AppleIntelligenceGlowEffect/ReadMe/Header.png)
 
 # Devices
 - WatchOS (Complete)
@@ -12,4 +12,4 @@ Made Entirely In SwiftUI with no Metal Shaders
 
 #WatchOS Demo
 
-![](https://github.com/AppleIntelligenceGlowEffect/ReadMe/WatchOSDemo.gif)
+![](https://github.com/jacobamobin/AppleIntelligenceGlowEffect/ReadMe/WatchOSDemo.gif)
