@@ -19,7 +19,7 @@ Will be used in [Apple Inteligence For WatchOS](https://github.com/jacobamobin/A
 
 # IOS Demo 
 
-![IOS Demo](ReadMe/IOSDemo.gif)
+![IOS Demo](ReadMe/IphoneDemo.gif)
 
 # Customization
 Customize time interval and animation duration to fine tune the effect
