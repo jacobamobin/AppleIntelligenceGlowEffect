@@ -4,7 +4,7 @@
 import SwiftUI
 import WatchKit
 
-struct WatchOS: View {
+struct GlowEffect: View {
     @State private var gradientStops: [Gradient.Stop] = GlowEffect.generateGradientStops()
 
     var body: some View {
@@ -132,5 +132,5 @@ extension Color {
 }
 
 #Preview {
-    WatchOS()
+    GlowEffect()
 }
