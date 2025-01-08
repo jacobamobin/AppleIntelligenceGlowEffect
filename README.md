@@ -17,6 +17,10 @@ Will be used in [Apple Inteligence For WatchOS](https://github.com/jacobamobin/A
 
 ![WatchOS Demo](ReadMe/WatchOSDemo.gif)
 
+# IOS Demo 
+
+![IOS Demo](ReadMe/IOSDemo.gif)
+
 # Customization
 Customize time interval and animation duration to fine tune the effect
 ```
