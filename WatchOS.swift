@@ -55,7 +55,6 @@ struct GlowEffect: View {
             Gradient.Stop(color: Color(hex: "BC82F3"), location: Double.random(in: 0...1)),
             Gradient.Stop(color: Color(hex: "F5B9EA"), location: Double.random(in: 0...1)),
             Gradient.Stop(color: Color(hex: "8D9FFF"), location: Double.random(in: 0...1)),
-            Gradient.Stop(color: Color(hex: "AA6EEE"), location: Double.random(in: 0...1)),
             Gradient.Stop(color: Color(hex: "FF6778"), location: Double.random(in: 0...1)),
             Gradient.Stop(color: Color(hex: "FFBA71"), location: Double.random(in: 0...1)),
             Gradient.Stop(color: Color(hex: "C686FF"), location: Double.random(in: 0...1))
