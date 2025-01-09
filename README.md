@@ -9,7 +9,7 @@ Will be used in [Apple Inteligence For WatchOS](https://github.com/jacobamobin/A
 
 # Devices
 - WatchOS (Complete)
-- IOS (Coming Soon)
+- IOS (Complete)
 - IpadOS (Coming Soon)
 - MacOS (Coming Soon)
 
