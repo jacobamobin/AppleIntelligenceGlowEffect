@@ -15,7 +15,7 @@ Will be used in [Apple Inteligence For WatchOS](https://github.com/jacobamobin/A
 
 # WatchOS Demo
 - WatchOS.Swift is the old version of the animation
-- WatchOS_WithFreeze has updated performance and a Freeze (Boolean) parameter to freeze the animation in place
+- WatchOS_WithFreeze.swift has updated performance and a Freeze (Boolean) parameter to freeze the animation in place
 
 ![WatchOS Demo](ReadMe/WatchOSDemo.gif)
 
