@@ -22,7 +22,7 @@ Will be used in [Apple Inteligence For WatchOS](https://github.com/jacobamobin/A
 # IOS Demos
 - Type to Siri Effect
 
-![IOSTypeToSiriEffect](ReadMe/TypeToSiri.gif)
+![IOS Type To Siri Effect](ReadMe/TypeToSiri.gif)
 
 - Apple Intelligence Glow Effect
   
