@@ -8,11 +8,13 @@
 
 
 import SwiftUI
+import Combine
 
 struct TypeToSiri: View {
     @State private var tempText: String = ""
     @State private var x: Int = 0
-    
+    @State private var timerCancellable: AnyCancellable?
+
     private var gradientsPill: [Gradient] = [
         Gradient(colors: [
             Color(hex: "#FF6778"), // PINK
@@ -50,9 +52,6 @@ struct TypeToSiri: View {
             Color(hex: "#A0414B")  // Further Darkened Pink
         ])
     ]
-
-    
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         ZStack {
@@ -110,13 +109,22 @@ struct TypeToSiri: View {
                 }
                 .padding(40)
                 .padding(.top, UIScreen.main.bounds.height / 2 + 50)
-                .onReceive(timer) { _ in
+            }
+        }
+        .background(Image("Wallpaper"))
+        .onAppear {
+            // Start timer for gradient cycling
+            timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
                     x = (x + 1) % gradientsPill.count
                 }
-            }
-        }.background(Image("Wallpaper"))
-        
-        
+        }
+        .onDisappear {
+            // Cancel timer to prevent memory leaks
+            timerCancellable?.cancel()
+            timerCancellable = nil
+        }
     }
 }
 
