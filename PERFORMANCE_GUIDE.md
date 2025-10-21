@@ -1,7 +1,7 @@
 # Performance Optimization Guide
 
 ## Overview
-This guide details the performance improvements made to fix the 100% CPU usage issue on iOS devices.
+This guide details the performance improvements made to fix the 100% CPU usage issue across all platforms (iOS, WatchOS, and TypeToSiri effect).
 
 ## Issues Fixed
 
@@ -46,20 +46,46 @@ This guide details the performance improvements made to fix the 100% CPU usage i
 - Optimized to 0.5 second intervals with 1.0 second duration
 - Low-power mode uses 1.0 second intervals with 1.5 second duration
 
-## Performance Improvements
+## Performance Improvements by Platform
 
-### Standard Mode (IOS.swift)
+### iOS Platform
+
+#### Standard Mode (IOS.swift)
 - **Before:** 100% CPU usage, multiple timer leaks
 - **After:** ~40-60% CPU usage with proper cleanup
 - 4 visual layers (1 no-blur + 3 blur layers)
 - Update interval: 0.5 seconds
 - Suitable for: iPhone 12 and newer
 
-### Low Power Mode (IOS_LowPowerMode.swift)
+#### Low Power Mode (IOS_LowPowerMode.swift)
 - **CPU Usage:** ~20-30% CPU usage
 - 2 visual layers (1 no-blur + 1 blur layer)
 - Update interval: 1.0 seconds
 - Suitable for: Older devices, battery saving mode, iPhone SE/11
+
+#### TypeToSiri Effect (TypeToSiri.Swift)
+- **Before:** Minor timer leak, no cleanup on view disappear
+- **After:** ~5-10% CPU usage with proper cleanup
+- Simple gradient cycling animation
+- Update interval: 1.0 seconds (much slower than glow effects)
+- Suitable for: All iOS devices
+
+### WatchOS Platform
+
+#### Standard Mode (WatchOS.swift)
+- **Before:** 100% CPU usage, 4 separate timer leaks
+- **After:** ~30-50% CPU usage with proper cleanup
+- 4 visual layers (1 no-blur + 3 blur layers)
+- Update interval: 0.5 seconds (optimized for Watch battery)
+- Suitable for: Apple Watch Series 10, Ultra 1/2
+
+#### Enhanced Mode with Freeze (WatchOS_WIthFreeze.swift)
+- **Before:** Already had better timer management, but using Timer arrays
+- **After:** ~30-50% CPU usage with cleaner Combine-based implementation
+- 4 visual layers with freeze capability
+- Update interval: 0.5 seconds
+- Supports all Apple Watch models with WatchOS 11
+- **Unique feature:** Freeze capability to stop animations entirely (0% CPU when frozen)
 
 ## Optimization Techniques Applied
 
@@ -95,11 +121,27 @@ Removed redundant ZStack wrappers that added extra view hierarchy overhead
 
 ## Usage Recommendations
 
-### For New/High-End Devices (iPhone 12+)
+### iOS Platform
+
+#### For New/High-End Devices (iPhone 12+)
 Use `IOS.swift` - Full visual quality with optimized performance
 
-### For Older Devices or Battery Saving
+#### For Older Devices or Battery Saving
 Use `IOS_LowPowerMode.swift` - Reduced effects but excellent performance
+
+#### For Type to Siri Effect
+Use `TypeToSiri.Swift` - Optimized for all devices, minimal CPU impact
+
+### WatchOS Platform
+
+#### For Apple Watch Series 10, Ultra 1/2
+Use `WatchOS.swift` - Optimized for newer watches
+
+#### For All WatchOS 11 Compatible Devices
+Use `WatchOS_WIthFreeze.swift` - Dynamic device configuration with freeze capability
+- Supports all watch sizes with automatic corner radius detection
+- Can freeze animations to save battery when not actively viewing
+- Best overall choice for WatchOS
 
 ### Custom Configuration
 You can create your own variant by adjusting these parameters:
@@ -140,13 +182,24 @@ The optimizations ensure:
 
 ## Before & After Comparison
 
-| Metric | Before | After (Standard) | After (Low Power) |
-|--------|--------|------------------|-------------------|
-| CPU Usage | 100% | 40-60% | 20-30% |
+### iOS Platform
+| Metric | IOS.swift (Before) | IOS.swift (After) | IOS_LowPowerMode.swift | TypeToSiri.Swift |
+|--------|-------------------|-------------------|------------------------|------------------|
+| CPU Usage | 100% | 40-60% | 20-30% | 5-10% |
+| Active Timers | 4+ (leaked) | 1 (managed) | 1 (managed) | 1 (managed) |
+| Blur Layers | 3 | 3 | 1 | 2 (small areas) |
+| Update Interval | 0.4s | 0.5s | 1.0s | 1.0s |
+| Memory Leaks | Yes | No | No | No |
+
+### WatchOS Platform
+| Metric | WatchOS.swift (Before) | WatchOS.swift (After) | WatchOS_WIthFreeze.swift (After) |
+|--------|----------------------|----------------------|----------------------------------|
+| CPU Usage | 100% | 30-50% | 30-50% (0% when frozen) |
 | Active Timers | 4+ (leaked) | 1 (managed) | 1 (managed) |
-| Blur Layers | 3 | 3 | 1 |
-| Update Interval | 0.4s | 0.5s | 1.0s |
+| Blur Layers | 3 | 3 | 3 |
+| Update Interval | 0.25-0.5s | 0.5s | 0.5s |
 | Memory Leaks | Yes | No | No |
+| Freeze Feature | No | No | Yes |
 
 ## Further Optimization Options
 
