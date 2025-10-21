@@ -12,6 +12,8 @@ A beautiful, customizable SwiftUI-based glow effect that mimics Apple's Intellig
 - ⚡️ Optimized performance with configurable parameters
 - 🔄 Smooth, fluid animations
 - 🎯 Easy to integrate into existing projects
+- 🔋 Low power mode variant for older devices and battery saving
+- 🚀 Fixed timer leaks and reduced CPU usage from 100% to 20-60%
 
 ## Platform Support
 
@@ -30,12 +32,16 @@ Two versions available:
 ![WatchOS Demo](ReadMe/WatchOSDemo.gif)
 
 ### iOS
-Two stunning effects:
+Two stunning effects with performance-optimized variants:
 1. Type to Siri Effect
 2. Apple Intelligence Glow Effect
+   - `IOS.swift`: Standard version (optimized for iPhone 12+)
+   - `IOS_LowPowerMode.swift`: Ultra-performance version for older devices or battery saving
 
 ![IOS Type To Siri Effect](ReadMe/TypeToSiri.gif)
 ![IOS Demo](ReadMe/IphoneDemo.gif)
+
+**Performance Note:** See [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) for optimization details and device recommendations.
 
 ## Installation
 
