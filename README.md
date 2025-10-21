@@ -17,7 +17,7 @@ A beautiful, customizable SwiftUI-based glow effect that mimics Apple's Intellig
 
 - ✅ WatchOS (Complete)
 - ✅ iOS (Complete)
-- ⏳ iPadOS (Coming Soon)
+- ✅ iPadOS (Complete)
 - ⏳ macOS (Coming Soon)
 
 ## Demos
@@ -37,9 +37,15 @@ Two stunning effects:
 ![IOS Type To Siri Effect](ReadMe/TypeToSiri.gif)
 ![IOS Demo](ReadMe/IphoneDemo.gif)
 
+### iPadOS
+Optimized for iPad's larger display with adjusted parameters:
+- Increased corner radius (65pt) for better visual proportion on larger screens
+- Enhanced glow effect with adjusted blur radii and line widths
+- Smooth animations perfectly tuned for iPad displays
+
 ## Installation
 
-1. Copy the desired platform file (e.g., `WatchOS.swift` or `IOS.swift`) into your project
+1. Copy the desired platform file (e.g., `WatchOS.swift`, `IOS.swift`, or `iPadOS.swift`) into your project
 2. Import the file in your SwiftUI view
 3. Implement the effect as shown in the examples below
 
