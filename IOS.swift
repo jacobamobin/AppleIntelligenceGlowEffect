@@ -1,46 +1,32 @@
 import SwiftUI
+import Combine
 
 struct GlowEffect: View {
     @State private var gradientStops: [Gradient.Stop] = GlowEffect.generateGradientStops()
+    @State private var timer: AnyCancellable?
 
     var body: some View {
         ZStack {
             EffectNoBlur(gradientStops: gradientStops, width: 6)
-                .onAppear {
-                    // Start a timer to update the gradient stops every second
-                    Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            gradientStops = GlowEffect.generateGradientStops()
-                        }
-                    }
-                }
             Effect(gradientStops: gradientStops, width: 9, blur: 4)
-                .onAppear {
-                    // Start a timer to update the gradient stops every second
-                    Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
-                        withAnimation(.easeInOut(duration: 0.6)) {
-                            gradientStops = GlowEffect.generateGradientStops()
-                        }
-                    }
-                }
             Effect(gradientStops: gradientStops, width: 11, blur: 12)
-                .onAppear {
-                    // Start a timer to update the gradient stops every second
-                    Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
-                        withAnimation(.easeInOut(duration: 0.8)) {
-                            gradientStops = GlowEffect.generateGradientStops()
-                        }
-                    }
-                }
             Effect(gradientStops: gradientStops, width: 15, blur: 15)
-                .onAppear {
-                    // Start a timer to update the gradient stops every second
-                    Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
-                        withAnimation(.easeInOut(duration: 1)) {
-                            gradientStops = GlowEffect.generateGradientStops()
-                        }
+        }
+        .drawingGroup() // Composite layers into a single render pass
+        .onAppear {
+            // Use a single timer for all layers to avoid redundant updates
+            timer = Timer.publish(every: 0.5, on: .main, in: .common)
+                .autoconnect()
+                .sink { _ in
+                    withAnimation(.easeInOut(duration: 1.0)) {
+                        gradientStops = GlowEffect.generateGradientStops()
                     }
                 }
+        }
+        .onDisappear {
+            // Cancel timer to prevent memory leaks
+            timer?.cancel()
+            timer = nil
         }
     }
     
@@ -63,22 +49,21 @@ struct Effect: View {
     var blur: CGFloat
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 55)
-                .strokeBorder(
-                    AngularGradient(
-                        gradient: Gradient(stops: gradientStops),
-                        center: .center
-                    ),
-                    lineWidth: width
-                )
-                .frame(
-                    width: UIScreen.main.bounds.width,
-                    height: UIScreen.main.bounds.height
-                )
-                .padding(.top, -17)
-                .blur(radius: blur)
-        }
+        RoundedRectangle(cornerRadius: 55)
+            .strokeBorder(
+                AngularGradient(
+                    gradient: Gradient(stops: gradientStops),
+                    center: .center
+                ),
+                lineWidth: width
+            )
+            .frame(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height
+            )
+            .padding(.top, -17)
+            .blur(radius: blur)
+            .compositingGroup() // Optimize blur rendering
     }
 }
 
@@ -87,21 +72,19 @@ struct EffectNoBlur: View {
     var width: CGFloat
 
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 55)
-                .strokeBorder(
-                    AngularGradient(
-                        gradient: Gradient(stops: gradientStops),
-                        center: .center
-                    ),
-                    lineWidth: width
-                )
-                .frame(
-                    width: UIScreen.main.bounds.width,
-                    height: UIScreen.main.bounds.height
-                )
-                .padding(.top, -26)
-        }
+        RoundedRectangle(cornerRadius: 55)
+            .strokeBorder(
+                AngularGradient(
+                    gradient: Gradient(stops: gradientStops),
+                    center: .center
+                ),
+                lineWidth: width
+            )
+            .frame(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height
+            )
+            .padding(.top, -26)
     }
 }
 
