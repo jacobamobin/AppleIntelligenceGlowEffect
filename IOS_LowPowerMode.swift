@@ -1,25 +1,25 @@
 import SwiftUI
 import Combine
 
-struct GlowEffect: View {
-    @State private var gradientStops: [Gradient.Stop] = GlowEffect.generateGradientStops()
+/// Ultra-performance variant of GlowEffect optimized for older devices or battery saving mode
+/// This version reduces blur layers and animation frequency for maximum performance
+struct GlowEffectLowPower: View {
+    @State private var gradientStops: [Gradient.Stop] = GlowEffectLowPower.generateGradientStops()
     @State private var timer: AnyCancellable?
 
     var body: some View {
         ZStack {
-            EffectNoBlur(gradientStops: gradientStops, width: 6)
-            Effect(gradientStops: gradientStops, width: 9, blur: 4)
-            Effect(gradientStops: gradientStops, width: 11, blur: 12)
-            Effect(gradientStops: gradientStops, width: 15, blur: 15)
+            EffectNoBlurLowPower(gradientStops: gradientStops, width: 6)
+            EffectLowPower(gradientStops: gradientStops, width: 10, blur: 6)
         }
         .drawingGroup() // Composite layers into a single render pass
         .onAppear {
-            // Use a single timer for all layers to avoid redundant updates
-            timer = Timer.publish(every: 0.5, on: .main, in: .common)
+            // Slower update rate for better performance
+            timer = Timer.publish(every: 1.0, on: .main, in: .common)
                 .autoconnect()
                 .sink { _ in
-                    withAnimation(.easeInOut(duration: 1.0)) {
-                        gradientStops = GlowEffect.generateGradientStops()
+                    withAnimation(.easeInOut(duration: 1.5)) {
+                        gradientStops = GlowEffectLowPower.generateGradientStops()
                     }
                 }
         }
@@ -29,7 +29,7 @@ struct GlowEffect: View {
             timer = nil
         }
     }
-    
+
     // Function to generate random gradient stops
     static func generateGradientStops() -> [Gradient.Stop] {
         [
@@ -43,7 +43,7 @@ struct GlowEffect: View {
     }
 }
 
-struct Effect: View {
+struct EffectLowPower: View {
     var gradientStops: [Gradient.Stop]
     var width: CGFloat
     var blur: CGFloat
@@ -67,7 +67,7 @@ struct Effect: View {
     }
 }
 
-struct EffectNoBlur: View {
+struct EffectNoBlurLowPower: View {
     var gradientStops: [Gradient.Stop]
     var width: CGFloat
 
@@ -88,22 +88,6 @@ struct EffectNoBlur: View {
     }
 }
 
-extension Color {
-    init(hex: String) {
-        let scanner = Scanner(string: hex)
-        _ = scanner.scanString("#")
-        
-        var hexNumber: UInt64 = 0
-        scanner.scanHexInt64(&hexNumber)
-        
-        let r = Double((hexNumber & 0xff0000) >> 16) / 255
-        let g = Double((hexNumber & 0x00ff00) >> 8) / 255
-        let b = Double(hexNumber & 0x0000ff) / 255
-        
-        self.init(red: r, green: g, blue: b)
-    }
-}
-
 #Preview {
-    GlowEffect()
+    GlowEffectLowPower()
 }

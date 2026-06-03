@@ -1,12 +1,13 @@
 import SwiftUI
 import WatchKit
+import Combine
 
 // THIS VERSION SUPPORTS ALL APPLE WATCHES COMPATIBLE WITH WATCHOS 11
 // MARK: The Apple intelligence glow effect function
 // It is made up of 4 different layers.
 struct GlowEffect: View {
     @State private var gradientStops: [Gradient.Stop] = GlowEffect.generateGradientStops()
-    @State private var timers: [Timer] = []
+    @State private var timer: AnyCancellable?
 
     var freeze: Bool
 
@@ -22,39 +23,41 @@ struct GlowEffect: View {
             Effect(gradientStops: gradientStops, width: 9, blur: 12, deviceProperties: deviceProperties)
             Effect(gradientStops: gradientStops, width: 12, blur: 15, deviceProperties: deviceProperties)
         }
+        .drawingGroup() // Composite layers into a single render pass
         .onAppear {
             if !freeze {
-                startTimers()
+                startTimer()
             }
         }
         .onChange(of: freeze) { isFrozen in
             if isFrozen {
-                stopTimers()
+                stopTimer()
             } else {
-                startTimers()
+                startTimer()
             }
         }
         .onDisappear {
-            stopTimers()
+            stopTimer()
         }
     }
 
-    // MARK: Function to start the timers for the gradients
-    private func startTimers() {
-        stopTimers() // Ensure no existing timers are running
-        timers.append(
-            Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { _ in
-                withAnimation(.easeInOut(duration: 0.6)) {
+    // MARK: Function to start the timer for the gradients
+    private func startTimer() {
+        stopTimer() // Ensure no existing timer is running
+        // Optimized for WatchOS battery life - slightly slower updates
+        timer = Timer.publish(every: 0.5, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                withAnimation(.easeInOut(duration: 1.0)) {
                     gradientStops = GlowEffect.generateGradientStops()
                 }
             }
-        )
     }
 
-    // MARK: Function to stop the timers for the gradients
-    private func stopTimers() {
-        timers.forEach { $0.invalidate() }
-        timers.removeAll()
+    // MARK: Function to stop the timer for the gradients
+    private func stopTimer() {
+        timer?.cancel()
+        timer = nil
     }
 
     // Function to generate random gradient stops on an Angular Gradient
@@ -96,6 +99,7 @@ struct Effect: View {
             )
             .padding(.top, -1 * CGFloat(deviceProperties.screenOffset))
             .blur(radius: blur)
+            .compositingGroup() // Optimize blur rendering
     }
 }
 
