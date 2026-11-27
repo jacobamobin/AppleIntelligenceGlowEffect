@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+    <key>CFBundleName</key><string>Music Glow</string>
+    <key>CFBundleDisplayName</key><string>Music Glow</string>
+    <key>CFBundleIdentifier</key><string>com.jacobamobin.MusicGlow</string>
+    <key>CFBundleExecutable</key><string>MusicGlow</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleShortVersionString</key><string>1.0.0</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>LSMinimumSystemVersion</key><string>14.2</string>
+    <key>LSUIElement</key><true/>
+    <key>NSHighResolutionCapable</key><true/>
+    <key>NSAppleEventsUsageDescription</key><string>Music Glow reads the current song and album artwork from Music to color the bottom-edge glow. It never controls playback.</string>
+    <key>NSAudioCaptureUsageDescription</key><string>Music Glow analyzes Music's audio locally to animate the glow spectrum. Audio is never saved or uploaded.</string>
+</dict></plist>

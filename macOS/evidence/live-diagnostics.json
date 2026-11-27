@@ -1,0 +1,23 @@
+{
+  "artworkLoaded" : true,
+  "audio" : "Music audio tap connected",
+  "bass" : 0.50697803497314453,
+  "dockHeight" : 87,
+  "drawable" : "{1728, 87}",
+  "fps" : 60,
+  "frame" : "{{0, 0}, {1728, 87}}",
+  "frames" : 3817,
+  "heightInBackingPixels" : 174,
+  "ignoresMouse" : true,
+  "meanGPUms" : 0.51572968556750876,
+  "menuBarHeight" : 32,
+  "metadataError" : "",
+  "onset" : 0.34206500649452209,
+  "paused" : false,
+  "playing" : true,
+  "preview" : false,
+  "rms" : 0.096206285059452057,
+  "screen" : "Built-in Retina Display",
+  "spectrumPeak" : 0.50697803497314453,
+  "windowLevel" : 3
+}

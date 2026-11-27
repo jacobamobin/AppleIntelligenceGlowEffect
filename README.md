@@ -1,12 +1,39 @@
 # Apple Intelligence Glow Effect
 
-A beautiful, customizable SwiftUI-based glow effect that mimics Apple's Intelligence UI design language. This effect is built entirely in SwiftUI without Metal shaders, making it lightweight and easy to implement across Apple platforms.
+A customizable glow effect that mimics Apple's Intelligence UI design language. The iOS, iPadOS, and watchOS examples use SwiftUI. The native [macOS Music Glow app](macOS/README.md) uses Metal for an audio-reactive, artwork-colored glow along the bottom of the built-in display.
 
 ![Header](ReadMe/Header.png)
 
-## Features
+## Music Glow for macOS
 
-- 🌟 Pure SwiftUI implementation - no Metal shaders required
+**Your music, around your Dock.** A standalone menu bar app that brings the glow to your MacBook. Album artwork sets the colors; the music shapes the light.
+
+![Music Glow animated native Metal preview](ReadMe/MusicGlow/music-glow-demo.gif)
+
+*Six-second preview rendered with the app’s actual Metal shader and generated audio input. Live colors follow the current album artwork.*
+
+[**Download Music Glow 1.0.0 · Apple Silicon**](macOS/releases/Music-Glow-1.0.0-macOS-arm64.zip) · [Setup & troubleshooting](macOS/README.md) · [Build from source](macOS/README.md#build-from-source) · [SHA-256](macOS/releases/Music-Glow-1.0.0-macOS-arm64.zip.sha256)
+
+- **Artwork becomes atmosphere.** Four colors extracted from the current album blend gently as tracks change.
+- **Light follows sound.** Bass, transients, and 64 frequency bands animate a soft glow across the bottom edge, with taller blooms at the corners.
+- **Your desktop stays usable.** The transparent overlay lets clicks through; everything lives in the waveform menu bar icon.
+- **Local and Music-only.** Analyzes Apple Music audio on your Mac. No saved recordings, uploads, audio drivers, or playback controls.
+
+### Try it
+
+1. Download and unzip the Apple Silicon package. Drag **Music Glow.app** into **Applications** and open it.
+2. Open **Apple Music** and play a song. Allow Music automation and system audio recording when macOS asks.
+3. Use the **waveform icon** in the menu bar to change sensitivity, try the 30-second visual preview, or quit.
+
+Requires **macOS 14.2+**, Metal, and an **unmirrored built-in MacBook display**. The download is **arm64 / Apple Silicon**; Intel users can build from source, but Intel execution has not been tested. Use a bottom-positioned Dock for the intended appearance. This community build is **ad-hoc signed and not notarized**; see the [first-launch instructions](macOS/README.md#first-launch--permissions) if macOS blocks it.
+
+## SwiftUI effects
+
+The examples below are reusable SwiftUI views for iPhone, iPad, and Apple Watch.
+
+### Features
+
+- 🌟 SwiftUI examples — the standalone macOS app uses Metal
 - 📱 Cross-platform support for Apple devices
 - 🎨 Fully customizable colors and animations
 - ⚡️ Optimized performance with configurable parameters
@@ -20,7 +47,7 @@ A beautiful, customizable SwiftUI-based glow effect that mimics Apple's Intellig
 - ✅ WatchOS (Complete)
 - ✅ iOS (Complete)
 - ✅ iPadOS (Complete)
-- ⏳ macOS (Coming Soon)
+- ✅ macOS 14.2+ — [Music Glow app with a native Metal renderer](macOS/README.md)
 
 ## Demos
 
@@ -58,7 +85,7 @@ Optimized for iPad's larger display with adjusted parameters:
 - Smooth animations perfectly tuned for iPad displays
 **Performance Note:** All files have been optimized to fix critical timer leaks that caused 100% CPU usage. See [PERFORMANCE_GUIDE.md](PERFORMANCE_GUIDE.md) for complete optimization details and device recommendations.
 
-## Installation
+## Integrate a SwiftUI effect
 
 1. Copy the desired platform file (e.g., `WatchOS.swift`, `IOS.swift`, or `iPadOS.swift`) into your project
 2. Import the file in your SwiftUI view

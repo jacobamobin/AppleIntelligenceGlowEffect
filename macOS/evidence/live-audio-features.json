@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-19",
+  "samples": 900,
+  "durationSeconds": 17.049,
+  "rms": {
+    "min": 0,
+    "max": 0.29406,
+    "stdev": 0.06759
+  },
+  "bass": {
+    "min": 0,
+    "max": 1,
+    "stdev": 0.22057
+  },
+  "mids": {
+    "min": 0,
+    "max": 0.67568,
+    "stdev": 0.11443
+  },
+  "treble": {
+    "min": 0,
+    "max": 0.0427,
+    "stdev": 0.0073
+  },
+  "onset": {
+    "min": 0,
+    "max": 1,
+    "stdev": 0.29726
+  },
+  "changingBandFrames": 896
+}

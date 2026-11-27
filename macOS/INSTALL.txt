@@ -1,0 +1,44 @@
+MUSIC GLOW 1.0.0 • macOS
+by Jacob Mobin
+
+Your music, around your Dock.
+
+1. Unzip the download and drag Music Glow.app to Applications.
+2. Open Music Glow. Its waveform icon appears in the menu bar.
+3. Open Apple Music and play a song on your built-in MacBook display.
+4. Allow Music automation and system audio recording when macOS asks.
+5. Use the waveform menu to adjust sensitivity, preview, retry, or quit.
+
+REQUIREMENTS
+macOS 14.2 or later, Metal, and a built-in display. Downloads are labeled
+with their architecture: arm64 is Apple Silicon; x86_64 is Intel.
+External and mirrored displays are intentionally excluded.
+
+FIRST LAUNCH
+This community build is ad-hoc signed, not Developer ID signed or notarized.
+macOS may block a downloaded copy. After checking the download's origin,
+use System Settings > Privacy & Security > Open Anyway if offered.
+If your Mac's policy prevents this, build from source instead. Do not
+disable Gatekeeper or remove quarantine recursively.
+
+PERMISSIONS
+Music automation reads the song and album artwork. System audio recording
+allows local analysis of Music's audio. No recordings are saved or uploaded.
+If you denied access, enable Music Glow in Privacy & Security > Automation
+and the audio recording section, relaunch, then choose Retry Music & Audio.
+The app never changes playback, your output device, or login items.
+
+NO GLOW?
+Enable Glow in the waveform menu and try Visual Preview (30 seconds).
+That preview uses generated input. Actual playback requires a capturable
+Music audio signal. Protected/unavailable audio may not produce a signal.
+Keep your laptop display open and unmirrored. For the intended appearance,
+place your Dock along the bottom. The app is silent while Music is paused.
+
+UNINSTALL
+Quit Music Glow from its menu and move the app to Trash.
+
+SOURCE, DETAILS & LICENSES
+https://github.com/jacobamobin/AppleIntelligenceGlowEffect/tree/main/macOS
+MIT License; see LICENSE. Nowsee's MIT license and provenance are bundled
+inside Music Glow.app/Contents/Resources/ThirdParty/Nowsee/.

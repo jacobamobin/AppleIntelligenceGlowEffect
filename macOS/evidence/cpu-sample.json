@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-19",
+  "sampleSeconds": 5.026,
+  "processes": {
+    "app": {
+      "cpuPercentOfOneCore": 4.78,
+      "rssMiB": 43.56
+    },
+    "metadataHelper": {
+      "cpuPercentOfOneCore": 0.2,
+      "rssMiB": 22.81
+    }
+  }
+}
